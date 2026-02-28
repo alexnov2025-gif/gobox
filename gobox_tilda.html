@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GOBOX — Спасательный набор | Акция 9 900 ₽</title>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;600;700&family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:     #f0ece2;
+  --dark:   #2d3d2d;
+  --green:  #4a5e3a;
+  --brown:  #8b5e3c;
+  --light:  #e8e2d4;
+  --accent: #b5c9a0;
+  --red:    #c0392b;
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--dark);font-family:'Lora',serif;overflow-x:hidden}
+a{text-decoration:none}
+img{display:block}
+
+/* ── UTILS ── */
+.label{font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--brown);margin-bottom:10px}
+.title{font-family:'Oswald',sans-serif;font-size:clamp(30px,4vw,50px);font-weight:700;line-height:1.05;color:var(--dark);margin-bottom:24px}
+.inner{max-width:1120px;margin:0 auto;padding:0 48px}
+.section{padding:96px 0}
+
+/* ── BUTTONS ── */
+.btn{display:inline-block;font-family:'Oswald',sans-serif;font-size:13px;letter-spacing:3px;text-transform:uppercase;padding:15px 36px;transition:all .2s;border:2px solid transparent;white-space:nowrap;cursor:pointer}
+.btn-brown{background:var(--brown);color:#fff;border-color:var(--brown)}
+.btn-brown:hover{background:transparent;color:var(--brown)}
+.btn-ghost{background:transparent;color:var(--accent);border-color:#3a4a3a}
+.btn-ghost:hover{border-color:var(--accent)}
+.btn-white{background:#fff;color:var(--dark);border-color:#fff}
+.btn-white:hover{background:transparent;color:#fff}
+.btn-ghost-white{background:transparent;color:#fff;border-color:rgba(255,255,255,.4)}
+.btn-ghost-white:hover{border-color:#fff}
+
+/* ── FLOATING ── */
+.float-cta{position:fixed;bottom:24px;right:24px;z-index:900;display:flex;flex-direction:column;align-items:flex-end;gap:6px}
+.float-hint{background:var(--dark);color:var(--accent);font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;text-transform:uppercase;padding:5px 12px}
+.float-btn{background:var(--brown);color:#fff;font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;text-transform:uppercase;padding:13px 22px;box-shadow:0 6px 24px rgba(0,0,0,.35);transition:all .2s}
+.float-btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(0,0,0,.4)}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;width:100%;z-index:800;background:var(--dark);display:flex;align-items:center;justify-content:space-between;padding:0 48px;height:60px}
+.nav-brand{display:flex;align-items:center;gap:12px}
+.nav-brand-logo{width:36px;height:36px;border-radius:6px;object-fit:cover;flex-shrink:0}
+.nav-brand-name{font-family:'Oswald',sans-serif;font-size:22px;font-weight:700;color:var(--bg);letter-spacing:4px}
+.nav-brand-name span{color:var(--brown)}
+.nav-links{display:flex;align-items:center;gap:24px}
+.nav-links a{color:var(--accent);font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.nav-cta{background:var(--brown);color:#fff!important;padding:8px 20px;border:2px solid var(--brown);transition:all .2s!important}
+.nav-cta:hover{background:transparent!important}
+
+/* ── PROMO BAR ── */
+.promo-bar{background:var(--brown);color:#fff;font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;text-align:center;padding:9px 20px;text-transform:uppercase;margin-top:60px}
+.promo-bar s{opacity:.55}
+.promo-bar strong{color:#ffe0c0}
+
+/* ── STOCK COUNTER ── */
+.stock-bar{background:#1a2a1a;display:flex;align-items:center;justify-content:center;gap:24px;padding:12px 48px;flex-wrap:wrap}
+.stock-item{display:flex;align-items:center;gap:8px;font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;color:#888;text-transform:uppercase}
+.stock-num{font-size:22px;font-weight:700;color:var(--accent)}
+.stock-divider{width:1px;height:24px;background:#2a3a2a}
+
+/* ── HERO ── */
+.hero{display:grid;grid-template-columns:55% 45%;min-height:calc(100vh - 112px);background:var(--dark)}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:72px 64px;gap:0}
+.hero-badge{display:inline-flex;align-items:center;background:var(--brown);color:#fff;font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:3px;padding:5px 14px;text-transform:uppercase;margin-bottom:22px;width:fit-content}
+.hero-h1{font-family:'Oswald',sans-serif;font-size:clamp(64px,9vw,108px);font-weight:700;line-height:.88;color:var(--bg);letter-spacing:-2px;margin-bottom:6px}
+.hero-h1 span{color:var(--accent)}
+.hero-tagline{font-family:'Oswald',sans-serif;font-weight:300;font-size:clamp(14px,1.8vw,20px);color:var(--brown);letter-spacing:6px;text-transform:uppercase;margin-bottom:28px}
+.hero-hook{font-size:15px;line-height:1.85;color:#aaa;font-style:italic;margin-bottom:32px;max-width:420px}
+.hero-hook strong{color:#fff;font-style:normal}
+.price-wrap{margin-bottom:32px}
+.price-was{font-family:'Oswald',sans-serif;font-size:20px;color:#555;text-decoration:line-through;letter-spacing:1px}
+.price-now{font-family:'Oswald',sans-serif;font-size:54px;font-weight:700;color:var(--accent);line-height:1;letter-spacing:-1px}
+.price-save{display:inline-block;background:var(--red);color:#fff;font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;padding:4px 12px;text-transform:uppercase;margin-top:6px}
+.price-note{font-size:11px;color:#555;margin-top:8px;letter-spacing:1px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.hero-right{position:relative;overflow:hidden}
+.hero-right img{width:100%;height:100%;object-fit:cover;filter:brightness(.65) saturate(.8)}
+.hero-right::after{content:'';position:absolute;inset:0;background:linear-gradient(to right,var(--dark) 0%,transparent 32%)}
+
+/* ── FOR WHOM ── */
+.forwhom-bg{background:var(--dark)}
+.forwhom-bg .label{color:var(--accent)}
+.forwhom-bg .title{color:var(--bg)}
+.forwhom-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:0}
+.fw-card{background:#1a2a1a;padding:44px 36px;border-top:3px solid transparent;transition:border-color .3s;position:relative;overflow:hidden}
+.fw-card::before{content:'';position:absolute;bottom:-20px;right:-20px;width:120px;height:120px;border-radius:50%;background:rgba(74,94,58,.08);transition:all .4s}
+.fw-card:hover{border-color:var(--brown)}
+.fw-card:hover::before{transform:scale(1.5)}
+.fw-icon{font-size:48px;margin-bottom:20px;display:block}
+.fw-title{font-family:'Oswald',sans-serif;font-size:22px;color:var(--bg);letter-spacing:1px;margin-bottom:14px}
+.fw-text{font-size:14px;color:#777;line-height:1.75}
+.fw-tag{display:inline-block;margin-top:16px;font-family:'Oswald',sans-serif;font-size:10px;letter-spacing:2px;color:var(--brown);text-transform:uppercase;border-bottom:1px solid var(--brown);padding-bottom:2px}
+
+/* ── PAIN ── */
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.pain-photo img{width:100%;height:500px;object-fit:cover;object-position:center top;filter:saturate(.85)}
+.pain-body{font-size:15px;line-height:1.9;color:#555;margin-bottom:16px}
+.pain-body strong{color:var(--dark)}
+.pain-list{list-style:none;margin:20px 0 32px;display:flex;flex-direction:column;gap:2px}
+.pain-list li{display:flex;align-items:center;gap:14px;background:var(--light);border-left:3px solid var(--brown);padding:12px 16px;font-size:14px;color:#444}
+.pain-list li::before{content:'⚠';font-size:15px;flex-shrink:0}
+
+/* ── DIVIDER CTA ── */
+.dcta{display:flex;align-items:center;justify-content:space-between;gap:40px;padding:40px 48px;flex-wrap:wrap}
+.dcta-dark{background:var(--dark)}
+.dcta-brown{background:var(--brown)}
+.dc-title{font-family:'Oswald',sans-serif;font-size:26px;letter-spacing:1px;margin-bottom:4px}
+.dcta-dark .dc-title{color:#fff}
+.dcta-brown .dc-title{color:#fff}
+.dc-sub{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px}
+.dcta-dark .dc-sub{color:#666}
+.dcta-brown .dc-sub{color:rgba(255,255,255,.6)}
+.dc-price{display:flex;flex-direction:column;align-items:center}
+.dc-was{font-family:'Oswald',sans-serif;font-size:18px;text-decoration:line-through}
+.dcta-dark .dc-was{color:#555}
+.dcta-brown .dc-was{color:rgba(255,255,255,.4)}
+.dc-now{font-family:'Oswald',sans-serif;font-size:44px;font-weight:700;line-height:1}
+.dcta-dark .dc-now{color:var(--accent)}
+.dcta-brown .dc-now{color:#fff}
+
+/* ── STORY ── */
+.story-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.story-photo img{width:100%;height:520px;object-fit:cover;filter:saturate(.85)}
+.story-body{font-size:15px;line-height:1.9;color:#555;margin-bottom:16px}
+.story-body strong{color:var(--dark)}
+.story-sig{margin-top:28px;padding-top:20px;border-top:1px solid var(--light)}
+.story-sig-name{font-family:'Oswald',sans-serif;font-size:15px;letter-spacing:2px;color:var(--dark)}
+.story-sig-role{font-size:11px;color:#999;margin-top:4px;letter-spacing:1px}
+
+/* ── CONTENTS ── */
+.contents-bg{background:var(--dark)}
+.contents-bg .label{color:var(--accent)}
+.contents-bg .title{color:var(--bg)}
+/* 3 + 4 layout using subgrid-like trick */
+.contents-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:48px}
+.c-card{background:#1a2a1a;padding:24px 20px;border-top:2px solid transparent;transition:border-color .2s}
+.c-card:hover{border-color:var(--brown)}
+.c-card-wide{grid-column:span 1} /* stays 1 col each */
+.c-card-title{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:2px;color:var(--accent);text-transform:uppercase;margin-bottom:14px}
+.c-card ul{list-style:none}
+.c-card ul li{display:flex;justify-content:space-between;align-items:center;font-size:11px;color:#999;padding:5px 0;border-bottom:1px solid #1e2e1e}
+.c-card ul li:last-child{border:none}
+.qty{color:var(--brown);font-family:'Oswald',sans-serif;font-size:12px}
+
+/* CONTENTS ROW LAYOUT: 4 top, 3 bottom centered */
+.contents-row1{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-bottom:2px}
+.contents-row2{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:48px}
+
+/* ── GALLERY ── */
+.gallery-grid{display:grid;grid-template-columns:1fr 1fr 1fr;grid-template-rows:320px 320px;gap:8px;margin-top:40px}
+.gallery-grid img{width:100%;height:100%;object-fit:cover;filter:saturate(.8);transition:filter .3s,transform .3s}
+.gallery-grid img:hover{filter:saturate(1.1);transform:scale(1.01)}
+.g-tall{grid-row:span 2}
+
+/* ── REVIEWS ── */
+.reviews-bg{background:var(--light)}
+.reviews-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px;align-items:start}
+.r-card{background:var(--bg);padding:24px 20px;border-bottom:3px solid var(--brown)}
+.r-card.r-featured{background:var(--dark);border-bottom-color:var(--accent);grid-row:span 1}
+.r-stars{color:var(--brown);font-size:13px;margin-bottom:12px}
+.r-card.r-featured .r-stars{color:var(--accent)}
+.r-text{font-style:italic;font-size:13px;line-height:1.75;color:#555;margin-bottom:14px}
+.r-card.r-featured .r-text{color:#aaa;font-size:14px}
+.r-author{font-family:'Oswald',sans-serif;font-size:12px;letter-spacing:1px;color:var(--dark)}
+.r-card.r-featured .r-author{color:var(--bg)}
+.r-city{font-size:10px;color:#aaa;margin-top:3px;letter-spacing:1px;text-transform:uppercase}
+.r-card.r-featured .r-city{color:#666}
+
+/* ── FINAL CTA ── */
+.final-bg{background:var(--green);position:relative;overflow:hidden;padding:100px 0;text-align:center}
+.final-bg::before{content:'GOBOX';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-family:'Oswald',sans-serif;font-size:260px;font-weight:700;color:rgba(0,0,0,.1);white-space:nowrap;pointer-events:none}
+.final-bg .label{color:var(--accent);justify-content:center;display:block}
+.final-price-was{font-family:'Oswald',sans-serif;font-size:22px;color:rgba(255,255,255,.4);text-decoration:line-through;margin-bottom:4px}
+.final-price-now{font-family:'Oswald',sans-serif;font-size:88px;font-weight:700;color:var(--bg);line-height:1;letter-spacing:-2px}
+.final-save{display:inline-block;background:var(--red);color:#fff;font-family:'Oswald',sans-serif;font-size:11px;letter-spacing:2px;padding:5px 16px;margin:12px 0 6px}
+.final-note{font-size:12px;color:rgba(255,255,255,.45);letter-spacing:1px;margin-bottom:40px}
+.final-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.final-limit{margin-top:20px;font-size:11px;color:rgba(255,255,255,.35);letter-spacing:2px;text-transform:uppercase}
+
+/* ── FOOTER ── */
+footer{background:#1a2a1a;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:32px 48px}
+.footer-brand{display:flex;align-items:center;gap:10px}
+.footer-brand-logo{width:32px;height:32px;border-radius:4px;object-fit:cover}
+.footer-brand-name{font-family:'Oswald',sans-serif;font-size:20px;color:var(--bg);letter-spacing:4px}
+.footer-brand-name span{color:var(--brown)}
+.footer-text{font-size:11px;color:#444}
+.footer-links{display:flex;gap:20px}
+.footer-links a{color:#555;font-size:11px;letter-spacing:1px;transition:color .2s}
+.footer-links a:hover{color:var(--accent)}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.hero-left>*{animation:fadeUp .6s ease forwards;opacity:0}
+.hero-badge{animation-delay:.10s}
+.hero-h1{animation-delay:.18s}
+.hero-tagline{animation-delay:.24s}
+.hero-hook{animation-delay:.30s}
+.price-wrap{animation-delay:.36s}
+.hero-btns{animation-delay:.44s}
+
+/* ── COUNTER JS HOOK ── */
+#stock-count{transition:color .3s}
+
+/* ── RESPONSIVE ── */
+@media(max-width:960px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .inner{padding:0 24px}
+  .section{padding:64px 0}
+  .hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:80px 24px 60px}
+  .hero-right{display:none}
+  .stock-bar{padding:12px 24px;gap:16px}
+  .forwhom-grid{grid-template-columns:1fr}
+  .pain-grid,.story-grid{grid-template-columns:1fr;gap:40px}
+  .pain-photo{display:none}
+  .dcta{flex-direction:column;padding:36px 24px;text-align:center}
+  .contents-row1,.contents-row2{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px}
+  .g-tall{grid-row:auto}
+  .reviews-grid{grid-template-columns:1fr 1fr}
+  footer{padding:28px 24px;flex-direction:column;text-align:center}
+  .float-cta{bottom:16px;right:16px}
+}
+</style>
+</head>
+<body>
+
+<!-- FLOATING -->
+<div class="float-cta">
+  <div class="float-hint">Акция: 9 900 ₽ вместо 12 900 ₽</div>
+  <a href="https://t.me/naborgribnika" class="float-btn">✈ Заказать в Telegram</a>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-brand">
+    <img class="nav-brand-logo" src="gobox_logo.jpg" alt="GOBOX">
+    <div class="nav-brand-name">GO<span>BOX</span></div>
+  </a>
+  <div class="nav-links">
+    <a href="#forwhom">Для кого</a>
+    <a href="#story">Об авторе</a>
+    <a href="#contents">Состав</a>
+    <a href="#reviews">Отзывы</a>
+    <a href="#buy" class="nav-cta">Купить — 9 900 ₽</a>
+  </div>
+</nav>
+
+<!-- PROMO BAR -->
+<div class="promo-bar">
+  🔥 Акция — цена снижена с <s>12 900 ₽</s> до <strong>9 900 ₽</strong> · только на текущую партию
+</div>
+
+<!-- STOCK COUNTER -->
+<div class="stock-bar">
+  <div class="stock-item">
+    <span class="stock-num" id="stock-count">7</span>
+    <span>наборов осталось</span>
+  </div>
+  <div class="stock-divider"></div>
+  <div class="stock-item">
+    <span class="stock-num">25+</span>
+    <span>уже продано</span>
+  </div>
+  <div class="stock-divider"></div>
+  <div class="stock-item">
+    <span class="stock-num">950 г</span>
+    <span>весит набор</span>
+  </div>
+  <div class="stock-divider"></div>
+  <div class="stock-item">
+    <span class="stock-num">40+</span>
+    <span>предметов</span>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-badge">Ручная сборка · Новороссийск · Россия</div>
+    <h1 class="hero-h1">GO<span>BOX</span></h1>
+    <div class="hero-tagline">Готов ко всему</div>
+    <p class="hero-hook">
+      Лес темнеет быстро.<br>
+      Клещ не спрашивает есть ли у тебя инструмент.<br>
+      <strong>GOBOX — это когда всё нужное уже висит на поясе.</strong>
+    </p>
+    <div class="price-wrap">
+      <div class="price-was">12 900 ₽</div>
+      <div class="price-now">9 900 ₽</div>
+      <div class="price-save">Экономия 3 000 ₽ · акция на текущую партию</div>
+      <div class="price-note">Доставка по всей России · СДЭК · Яндекс.Доставка</div>
+    </div>
+    <div class="hero-btns">
+      <a href="https://t.me/naborgribnika" class="btn btn-brown">✈ Заказать в Telegram</a>
+      <a href="#forwhom" class="btn btn-ghost">Для кого это?</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="gobox_belt.jpg" alt="GOBOX на поясе в лесу">
+  </div>
+</section>
+
+<!-- FOR WHOM -->
+<section class="section forwhom-bg" id="forwhom">
+  <div class="inner" style="margin-bottom:40px">
+    <div class="label">Для кого</div>
+    <h2 class="title" style="color:var(--bg)">Один набор —<br>три жизни</h2>
+  </div>
+  <div class="forwhom-grid">
+    <div class="fw-card">
+      <span class="fw-icon">🍄</span>
+      <div class="fw-title">Грибникам и охотникам</div>
+      <p class="fw-text">Лес непредсказуем. Тропинки теряются, телефон садится, темнеет раньше чем ждёшь. GOBOX весит как кружка кофе — но даёт огонь, свет, компас и первую помощь.</p>
+      <span class="fw-tag">Всегда на поясе →</span>
+    </div>
+    <div class="fw-card">
+      <span class="fw-icon">🎣</span>
+      <div class="fw-title">Рыбакам и туристам</div>
+      <p class="fw-text">Далёкий водоём, клещи, порезы, сломанное снаряжение. Один набор закрывает все базовые риски — удобная сумка-кобура на поясе не мешает движению.</p>
+      <span class="fw-tag">Проверено на воде →</span>
+    </div>
+    <div class="fw-card">
+      <span class="fw-icon">🚗</span>
+      <div class="fw-title">Автопутешественникам</div>
+      <p class="fw-text">Трасса ночью, незнакомый район, поломка вдали от города. GOBOX лежит в бардачке или висит под сиденьем — компактно, не мешает, ждёт своего часа.</p>
+      <span class="fw-tag">В каждую поездку →</span>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:48px">
+    <a href="https://t.me/naborgribnika" class="btn btn-brown">Купить GOBOX — 9 900 ₽</a>
+  </div>
+</section>
+
+<!-- PAIN -->
+<section class="section" style="background:var(--light)">
+  <div class="inner">
+    <div class="pain-grid">
+      <div class="pain-photo">
+        <img src="gobox_river.jpg" alt="GOBOX у реки">
+      </div>
+      <div>
+        <div class="label">Зачем нужен GOBOX</div>
+        <h2 class="title">Это случается<br>внезапно</h2>
+        <p class="pain-body">Лес, рыбалка, дальняя дорога — всё начинается спокойно. Но одна ситуация меняет всё: <strong>потерял тропинку, сел телефон, поранился, стемнело.</strong></p>
+        <p class="pain-body">В такие моменты не думаешь о снаряжении в машине. Думаешь о том, что <strong>прямо сейчас под рукой.</strong></p>
+        <ul class="pain-list">
+          <li>Потерял ориентир в лесу после 17:00</li>
+          <li>Вытащил клеща без инструмента — голыми руками</li>
+          <li>Нет огня, нет света, нет тепла</li>
+          <li>Сломалось снаряжение далеко от дороги</li>
+        </ul>
+        <a href="https://t.me/naborgribnika" class="btn btn-brown">Купить GOBOX — 9 900 ₽</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER CTA 1 -->
+<div class="dcta dcta-dark">
+  <div>
+    <div class="dc-title">Акция на текущую партию</div>
+    <div class="dc-sub">Осталось 7 наборов по акционной цене</div>
+  </div>
+  <div class="dc-price">
+    <div class="dc-was">12 900 ₽</div>
+    <div class="dc-now">9 900 ₽</div>
+  </div>
+  <a href="https://t.me/naborgribnika" class="btn btn-brown">✈ Заказать сейчас</a>
+</div>
+
+<!-- STORY -->
+<section class="section" style="background:var(--bg)" id="story">
+  <div class="inner">
+    <div class="story-grid">
+      <div class="story-photo">
+        <img src="gobox_tree.jpg" alt="GOBOX в лесу">
+      </div>
+      <div>
+        <div class="label">Кто создал GOBOX</div>
+        <h2 class="title">Меня зовут Александр.<br>Я строю автодома<br>и люблю дорогу.</h2>
+        <p class="story-body">Я много езжу по России. Строю автодома под заказ в Новороссийске — и сам путешествую. За годы поездок понял одно: <strong>в критической ситуации счёт идёт на минуты.</strong></p>
+        <p class="story-body">Когда знакомый заблудился в лесу под Новороссийском и провёл несколько часов без огня и связи — я решил собрать набор который реально работает. Не красивая коробочка для подарка. <strong>Инструмент.</strong></p>
+        <p class="story-body">Каждый предмет выбирал лично. Тестировал. Выбрасывал то что не работало. Оставлял только то что спасает.</p>
+        <div class="story-sig">
+          <div class="story-sig-name">Александр Перегуда</div>
+          <div class="story-sig-role">Основатель GOBOX · Мастер АвтоДом · Новороссийск</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTENTS -->
+<section class="section contents-bg" id="contents">
+  <div class="inner">
+    <div class="label">Полный состав</div>
+    <h2 class="title" style="color:var(--bg)">40+ предметов.<br>Каждый — на счету.</h2>
+    <!-- ROW 1: 4 cards -->
+    <div class="contents-row1">
+      <div class="c-card">
+        <div class="c-card-title">🔥 Огонь и свет</div>
+        <ul>
+          <li>Налобный фонарик COB <span class="qty">×1</span></li>
+          <li>Батарейки <span class="qty">×3</span></li>
+          <li>Зажигалка <span class="qty">×2</span></li>
+          <li>Свеча <span class="qty">×1</span></li>
+          <li>Сухое горючее <span class="qty">×1</span></li>
+        </ul>
+      </div>
+      <div class="c-card">
+        <div class="c-card-title">🧭 Навигация</div>
+        <ul>
+          <li>Свисток <span class="qty">×1</span></li>
+          <li>Компас <span class="qty">×1</span></li>
+          <li>Термометр <span class="qty">×1</span></li>
+          <li>Браслет светоотраж. <span class="qty">×1</span></li>
+        </ul>
+      </div>
+      <div class="c-card">
+        <div class="c-card-title">🪢 Верёвка и крепёж</div>
+        <ul>
+          <li>Паракорд 10м (250кг) <span class="qty">×1</span></li>
+          <li>Карабин (1200кг) <span class="qty">×1</span></li>
+          <li>Булавки <span class="qty">×3</span></li>
+        </ul>
+      </div>
+      <div class="c-card">
+        <div class="c-card-title">🔧 Инструменты</div>
+        <ul>
+          <li>Мультитул <span class="qty">×1</span></li>
+          <li>Пила-струна <span class="qty">×1</span></li>
+          <li>Экстрактор клещей <span class="qty">×3</span></li>
+          <li>Армированный скотч <span class="qty">×1</span></li>
+          <li>Суперклей <span class="qty">×1</span></li>
+          <li>Напальчник <span class="qty">×1</span></li>
+        </ul>
+      </div>
+    </div>
+    <!-- ROW 2: 3 cards centered -->
+    <div class="contents-row2">
+      <div class="c-card">
+        <div class="c-card-title">🩹 Аптечка</div>
+        <ul>
+          <li>Антисеп. салфетки <span class="qty">×3</span></li>
+          <li>Салфетка хлоргексидин <span class="qty">×1</span></li>
+          <li>Пластырь <span class="qty">×2</span></li>
+          <li>Таблетки для воды <span class="qty">×10</span></li>
+          <li>Перчатки <span class="qty">×1 пара</span></li>
+          <li>Пробирки (клещи) <span class="qty">×2</span></li>
+        </ul>
+      </div>
+      <div class="c-card">
+        <div class="c-card-title">💧 Вода и питание</div>
+        <ul>
+          <li>Фляга тритан 1л BPA FREE <span class="qty">×1</span></li>
+          <li>Кружка нержавейка <span class="qty">×1</span></li>
+          <li>Соль <span class="qty">×1</span></li>
+          <li>Энергетический набор <span class="qty">×2</span></li>
+          <li>Напиток для заваривания <span class="qty">×2</span></li>
+        </ul>
+      </div>
+      <div class="c-card">
+        <div class="c-card-title">📦 Прочее</div>
+        <ul>
+          <li>Термоодеяло <span class="qty">×1</span></li>
+          <li>Фольга алюминиевая <span class="qty">×1</span></li>
+          <li>Силикагель <span class="qty">×1</span></li>
+          <li>Блокнот + карандаш <span class="qty">×1</span></li>
+          <li>Инструкция GOBOX <span class="qty">×1</span></li>
+        </ul>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <a href="https://t.me/naborgribnika" class="btn btn-brown">Заказать GOBOX — 9 900 ₽</a>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" style="background:var(--bg)" id="gallery">
+  <div class="inner">
+    <div class="label">Живые фото</div>
+    <h2 class="title">Настоящий продукт</h2>
+    <div class="gallery-grid">
+      <img class="g-tall" src="gobox_belt.jpg" alt="GOBOX на поясе в лесу">
+      <img src="gobox_tree.jpg" alt="GOBOX у дерева">
+      <img src="gobox_river.jpg" alt="GOBOX у реки">
+      <img src="gobox_studio.jpg" alt="GOBOX кобура и бутылка">
+      <img src="gobox_layout.jpg" alt="Состав GOBOX">
+    </div>
+  </div>
+</section>
+
+<!-- DIVIDER CTA 2 -->
+<div class="dcta dcta-brown">
+  <div>
+    <div class="dc-title">Лучший подарок рыбаку, грибнику, туристу</div>
+    <div class="dc-sub">Упакован · опломбирован · готов к отправке</div>
+  </div>
+  <div class="dc-price">
+    <div class="dc-was">12 900 ₽</div>
+    <div class="dc-now">9 900 ₽</div>
+  </div>
+  <a href="https://t.me/naborgribnika" class="btn btn-white">✈ Написать в Telegram</a>
+</div>
+
+<!-- REVIEWS -->
+<section class="section reviews-bg" id="reviews">
+  <div class="inner">
+    <div class="label">Отзывы</div>
+    <h2 class="title">25+ владельцев GOBOX</h2>
+    <div class="reviews-grid">
+      <!-- Featured large review -->
+      <div class="r-card r-featured">
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">«Взял на грибную охоту под Краснодаром. Засиделись до темноты — фонарик и компас выручили по-настоящему. Жена смеялась когда покупал, теперь молчит. Теперь GOBOX всегда со мной — и в лес, и на рыбалку.»</p>
+        <div class="r-author">Дмитрий К.</div>
+        <div class="r-city">Краснодар · октябрь 2024</div>
+      </div>
+      <div class="r-card">
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">«Подарил отцу на 23 февраля. Рыбачит каждые выходные. Говорит — лучший подарок за много лет. Экстрактор уже использовал.»</p>
+        <div class="r-author">Максим Р.</div>
+        <div class="r-city">Ростов-на-Дону</div>
+      </div>
+      <div class="r-card">
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">«Езжу по кавказским трассам. GOBOX лежит в бардачке. Хорошая сборка — чувствуется что делал человек с головой.»</p>
+        <div class="r-author">Сергей В.</div>
+        <div class="r-city">Новороссийск</div>
+      </div>
+      <div class="r-card">
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">«Паракорд держит. Компактный и тяжёлый в хорошем смысле. Реальные вещи, не китайский мусор за 1000 рублей.»</p>
+        <div class="r-author">Алексей Н.</div>
+        <div class="r-city">Анапа</div>
+      </div>
+      <!-- Featured large review 2 -->
+      <div class="r-card r-featured">
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">«Брал в горы. Ночью резко похолодало — термоодеяло реально спасло ситуацию. Александр знает что кладёт в набор. Видно что сам путешественник, не просто торгаш.»</p>
+        <div class="r-author">Игорь М.</div>
+        <div class="r-city">Геленджик · ноябрь 2024</div>
+      </div>
+      <div class="r-card">
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">«На охоту беру каждый раз. Хочу взять второй — держать в машине. Мультитул — любимая вещь в наборе.»</p>
+        <div class="r-author">Владимир П.</div>
+        <div class="r-city">Армавир</div>
+      </div>
+      <div class="r-card">
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">«Всё в бутылке — оригинально. Жена взяла на пикник, теперь хочет свой. Буду брать второй.»</p>
+        <div class="r-author">Андрей Ф.</div>
+        <div class="r-city">Новороссийск</div>
+      </div>
+      <div class="r-card">
+        <div class="r-stars">★★★★★</div>
+        <p class="r-text">«Быстрая доставка, хорошая упаковка. Видно — собирал человек с душой. Инструкция внутри — отдельный плюс.»</p>
+        <div class="r-author">Николай Т.</div>
+        <div class="r-city">Пятигорск</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="final-bg" id="buy">
+  <div style="position:relative;z-index:1">
+    <div class="label" style="text-align:center">Заказать прямо сейчас</div>
+    <h2 class="title" style="color:#fff;text-align:center;font-size:clamp(36px,5vw,60px);margin-bottom:24px">GOBOX = Готов ко всему</h2>
+    <div style="text-align:center">
+      <div class="final-price-was">Обычная цена: 12 900 ₽</div>
+      <div class="final-price-now">9 900 ₽</div>
+      <div class="final-save">Акция — экономия 3 000 ₽</div>
+      <div class="final-note">Доставка СДЭК · Яндекс.Доставка · по всей России</div>
+      <div class="final-btns">
+        <a href="https://t.me/naborgribnika" class="btn btn-white">✈ Заказать в Telegram</a>
+        <a href="#" class="btn btn-ghost-white">Купить на Ozon (скоро)</a>
+      </div>
+      <div class="final-limit">Осталось 7 наборов по акционной цене</div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">
+    <img class="footer-brand-logo" src="gobox_logo.jpg" alt="GOBOX">
+    <div class="footer-brand-name">GO<span>BOX</span></div>
+  </div>
+  <div class="footer-text">© 2025 GOBOX · Александр Перегуда · ИП Перегуда Е.С. · Новороссийск</div>
+  <div class="footer-links">
+    <a href="https://t.me/naborgribnika">Telegram</a>
+    <a href="https://www.мастер-автодом.рф">МастерАвтоДом</a>
+    <a href="#contents">Состав</a>
+  </div>
+</footer>
+
+<script>
+// Animate stock counter
+(function(){
+  var el = document.getElementById('stock-count');
+  if(!el) return;
+  var target = 7, current = 12, duration = 1200, start = null;
+  function step(ts){
+    if(!start) start = ts;
+    var progress = Math.min((ts-start)/duration, 1);
+    el.textContent = Math.round(current + (target-current)*progress);
+    if(progress < 1) requestAnimationFrame(step);
+  }
+  setTimeout(function(){ requestAnimationFrame(step); }, 800);
+})();
+</script>
+
+</body>
+</html>
